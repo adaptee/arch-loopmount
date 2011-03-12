@@ -1,0 +1,19 @@
+install ()
+{
+    BINARIES="blkid"
+    FILES=""
+    SCRIPT="automount"
+}
+
+help ()
+{
+cat<<HELPEOF
+  This hook auto mount the root device base on cmdline.
+  Can support:
+	1. Boot from normal harddisk or USB disk;
+	2. Boot from CD-ROM or DVD-ROM;
+	3. Boot from loop device file (made by dd or other tools);
+	4. Boot from squashfs files;
+   ...
+HELPEOF
+}

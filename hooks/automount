@@ -1,0 +1,24 @@
+run_hook ()
+{
+
+    # Example: real_root=loop=/dev/sda1 loopfile=Arch/archlive.disk
+    case ${real_root} in loop\=*) 
+	loop=${real_root/loop=}
+	if [ -e $loop ]; then
+		fstype=$(blkid -u filesystem -o value -s TYPE -p "${loop}")
+		if [ "${readwrite}" = "no" ]; then rwopt="ro"; else rwopt="rw"; fi
+		mount -t $fstype -o $rwopt $loop $HOST
+		if [ -f $HOST/$loopfile ]; then
+			loopfile="$HOST/$loopfile"
+			fstype=$(blkid -u filesystem -o value -s TYPE -p "${loopfile}")
+			if [ "${fstype}" = "squashfs" ]; then rwopt="ro"; fi
+			mount -t $fstype -o $rwopt $loopfile $UNION
+			mkdir -p $UNION$HOST
+			mkdir -p $UNION$loop
+			mount -o bind $HOST $UNION$loop
+			MOUNTED=1
+		fi
+	fi
+	;;
+	esac
+}
