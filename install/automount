@@ -1,8 +1,18 @@
 install ()
 {
-    BINARIES="blkid"
+    MODULES=" $(checked_modules "/usb/host" | grep -ve "_cs" -e "sl811-hcd" -e "isp116x-hcd")"
+
+    MODULES=$(echo ${MODULES}) #trim whitespace
+    if [ -n "${MODULES}" ]; then
+        MODULES="${MODULES} usb_storage sd_mod sr_mod"
+        MODULES="${MODULES} $(checked_modules "drivers/usb/storage/ums-*")"
+    fi
+    MODULES="${MODULES} nls_utf8 cp936"
+    BINARIES="blkid mount.ntfs-3g tr"
     FILES=""
     SCRIPT="automount"
+
+    add_device /lib/udev/devices/loop0 b 7 0
 }
 
 help ()
