@@ -7,12 +7,12 @@ install ()
         MODULES="${MODULES} usb_storage sd_mod sr_mod"
         MODULES="${MODULES} $(checked_modules "drivers/usb/storage/ums-*")"
     fi
-    MODULES="${MODULES} nls_utf8 cp936"
+    MODULES="${MODULES} nls_utf8 loop"
+
     BINARIES="blkid mount.ntfs-3g tr"
     FILES=""
     SCRIPT="automount"
 
-    add_device /lib/udev/devices/loop0 b 7 0
 }
 
 help ()
