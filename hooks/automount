@@ -68,7 +68,7 @@ loop_mount_handler ()
 			#echo "mount -t $fstype -o loop,$rwopt $loopfile $UNION"
 			mount -t $fstype -o loop,$rwopt $loopfile $UNION
             		if [ $? -eq 0 ] ; then
-                		echo "mkdir -p $UNION$HOST"
+                                #echo "mkdir -p $UNION$HOST"
                			mkdir -p $UNION$HOST
 				# 将存放loop的分区挂载到目标系统的/host目录下，跟wubi的处理方式相同
                 		#echo "mount -o bind $HOST $UNION$HOST"
