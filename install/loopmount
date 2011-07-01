@@ -1,4 +1,4 @@
-install ()
+build ()
 {
     MODULES=" $(checked_modules "/usb/host" | grep -ve "_cs" -e "sl811-hcd" -e "isp116x-hcd")"
 
@@ -9,7 +9,7 @@ install ()
     fi
     MODULES="${MODULES} nls_utf8 loop"
 
-    BINARIES="blkid mount.ntfs-3g tr"
+    BINARIES="/sbin/blkid /sbin/mount.ntfs-3g /bin/tr"
     FILES=""
     SCRIPT="loopmount"
 
